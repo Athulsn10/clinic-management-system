@@ -14,14 +14,15 @@
                        <div class="d-flex justify-content-between">
                         <div>
                             <p class="p-0 m-0">Doctor's Name: {{ patient.doctor }}</p>
-                            <p class="p-0 m-0">prescription: {{ patient.pre }}</p>
+                            <p class="p-0 m-0">prescription: {{ patient.priscription }}</p>
                         </div>
                             <EditModal 
                             :patientId="patient.id" 
                             :name="patient.name" 
                             :age="patient.age"
                             :phone="patient.phone" 
-                            :bmi="patient.bmi" />
+                            :bmi="patient.bmi"
+                            :priscription="patient.priscription" />
                        </div>
                     </div>
                 </div>

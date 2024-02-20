@@ -51,7 +51,6 @@ export default {
   methods: {
     async addPatient() {
       try {
-        // Check if any of the required fields are empty
         if (!this.name || !this.age || !this.phone || !this.bmi) {
           console.error('Please fill all required fields.');
           return;
@@ -64,11 +63,11 @@ export default {
           bmi: this.bmi,
         });
         console.log('Patient added with ID: ', docRef.id);
-        // Optionally, you can reset the form fields or close the modal
         this.name = '';
         this.age = '';
         this.phone = '';
         this.bmi = '';
+        window.location.reload();
       } catch (error) {
         console.error('Error adding patient:', error);
       }
