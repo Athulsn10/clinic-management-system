@@ -23,6 +23,8 @@
               <div class="col-6">
                 <label for="">BMI</label>
                 <input v-model="eBmi" type="text" class="form-control mt-2">
+                <label for="">Doctor's name</label>
+                <input v-model="doctor" type="text" class="form-control mt-2">
                 <div class="form-floating mt-2">
                 <textarea v-model="priscription" class="form-control" placeholder="Enter Priscription here" id="floatingTextarea"></textarea>
                 <label for="floatingTextarea">Priscription</label>
@@ -52,6 +54,7 @@ export default {
       ePhone: this.phone,
       eBmi: this.bmi,
       priscription:"",
+      doctor:"",
       myModal: null,
     };
   },
@@ -80,7 +83,8 @@ export default {
           age: this.eAge,
           phone: this.ePhone,
           bmi: this.eBmi,
-          priscription: this.priscription
+          priscription: this.priscription,
+          doctor: this.doctor
         });
         this.closeModal();
         window.location.reload();

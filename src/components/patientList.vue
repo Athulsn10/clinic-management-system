@@ -1,9 +1,14 @@
 <template>
     <div class="container mt-3">
         <ul class="list-group">
-            <li v-for="patient in patients" :key="patient.id" class="list-group-item mt-3 shadow-sm">
+            <li v-for="patient in sortedPatients" :key="patient.id" class="list-group-item mt-3 shadow-sm">
                 <div class="row">
-                    <div class="col-4">{{patient.token}}</div>
+                    <div class="col-4">
+                        <div class="d-flex flex-column align-items-center justify-content-center">
+                            <p>Token Number</p>
+                            <p class="p-0 m-0 fs-1 fw-bolder">{{patient.token}}</p>
+                        </div>
+                    </div>
                     <div class="col-4">
                         <h3 class="p-0 m-0">{{ patient.name }}</h3>
                         <p class="p-0 m-0">Age: {{ patient.age }}</p>
@@ -45,6 +50,11 @@ export default {
             patients: [],
         };
     },
+    computed: {
+    sortedPatients() {
+      return this.patients.slice().sort((a, b) => a.token - b.token);
+    },
+  },
     components: {
         EditModal,
     },

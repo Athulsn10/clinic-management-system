@@ -36,45 +36,61 @@
 </template>
 
 <script>
-import { collection, addDoc } from 'firebase/firestore';
-import { db } from '../../firebaseSDK'
+import { collection, addDoc, getDocs } from 'firebase/firestore';
+import { db } from '../../firebaseSDK';
+
 export default {
   name: 'MyComponent',
   data() {
     return {
-      name:'',
+      name: '',
       age: '',
-      phone:'',
-      bmi:'',
+      phone: '',
+      bmi: '',
+      token: 0, 
     };
   },
+  mounted() {
+    this.fetchToken(); 
+  },
   methods: {
+    async fetchToken() {
+      try {
+        const querySnapshot = await getDocs(collection(db, 'patients'));
+        this.token = querySnapshot.size + 1; 
+      } catch (error) {
+        console.error('Error fetching token:', error);
+      }
+    },
     async addPatient() {
       try {
         if (!this.name || !this.age || !this.phone || !this.bmi) {
           console.error('Please fill all required fields.');
           return;
         }
-        // Add patient data to Firestore
         const docRef = await addDoc(collection(db, 'patients'), {
           name: this.name,
-          age: parseInt(this.age), // Convert age to a number
+          age: parseInt(this.age),
           phone: this.phone,
           bmi: this.bmi,
+          token: this.token, 
         });
+
         console.log('Patient added with ID: ', docRef.id);
         this.name = '';
         this.age = '';
         this.phone = '';
         this.bmi = '';
+        this.token++;
         window.location.reload();
       } catch (error) {
         console.error('Error adding patient:', error);
       }
     },
   },
-}
+};
 </script>
+
 
 <style scoped>
 /* your styles here */
